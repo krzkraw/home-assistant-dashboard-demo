@@ -1,0 +1,1785 @@
+type: sections
+max_columns: 4
+subview: false
+sections:
+# column 1
+  - type: grid
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.zamrazarka
+                state: "off"
+              - entity: binary_sensor.z2m_klatka_drzwi_contact
+                state_not: "on"
+              - entity: binary_sensor.z2m_balkon_drzwi_2_contact
+                state_not: "on"
+              - entity: binary_sensor.z2m_balkon_drzwi_dol_contact
+                state_not: "on"
+              - entity: binary_sensor.z2m_lazienka_drzwi_contact
+                state: "on"
+              - entity: binary_sensor.z2m_sypialnia_drzwi_contact
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: Brak alarmów
+              secondary: ...po tej stronie
+              icon: mdi:checkbox-marked-circle-outline
+              icon_color: green
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.zamrazarka
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! Topi się !"
+              secondary: zamrażarka
+              icon: mdi:fridge-bottom
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.z2m_klatka_drzwi_contact
+                state_not: "off"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! Drzwi !"
+              secondary: KLATKA!
+              icon: mdi:door-open
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+              badge_icon: mdi:sign-caution
+              badge_color: wolley
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.z2m_lazienka_drzwi_contact
+                state: "off"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! Drzwi !"
+              secondary: łazienka
+              icon: mdi:door-open
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.z2m_balkon_drzwi_2_contact
+                state_not: "off"
+              - entity: binary_sensor.z2m_balkon_drzwi_dol_contact
+                state_not: "off"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! Drzwi !"
+              secondary: balkon
+              icon: mdi:door-open
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.z2m_sypialnia_drzwi_contact
+                state: "off"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! Drzwi !"
+              secondary: sypialnia
+              icon: mdi:door-open
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+        columns: 2
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px)"
+      - square: false
+        type: grid
+        cards:
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            name: < salon
+            entity: switch.z2m_smartbulb_socket_salon
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:power-plug
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            entity: switch.z2m_smartplug_zigbee6
+            name: "roślinki "
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:power-plug
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            entity: switch.z2m_smartplug_zigbee5
+            name: palma
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:power-plug
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            entity: switch.z2m_smartplug_zigbee3
+            name: szafa
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:microphone-message
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            name: AI mic
+            entity: switch.assist_microphone_mute
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:power-plug
+            show_state: false
+            name: s. g. 1
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            entity: switch.z2m_sypialnia_gniazdko
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:power-plug
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            entity: switch.z2m_smartplug_zigbee2
+            name: s. g. 2
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb
+            show_state: false
+            icon_height: 44px
+            hold_action:
+              action: more-info
+            entity: light.yeelink_bslamp2_f8fb_light
+            name: lampka
+        columns: 4
+      - square: false
+        type: grid
+        cards:
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_kuchnia_1
+            name: "1"
+            icon_height: 40px
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            icon_height: 40px
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_kuchnia_2
+            name: "2"
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            icon_height: 40px
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_kuchnia_3
+            name: "3"
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            icon_height: 40px
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_kuchnia_4
+            name: "4"
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            icon_height: 40px
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_przejscie
+            name: "5"
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            icon_height: 40px
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_sypialnia
+            name: "6"
+          - show_name: false
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            icon: mdi:lightbulb-spot
+            show_state: false
+            icon_height: 40px
+            hold_action:
+              action: more-info
+            entity: light.z2m_led_gu10_klatka
+            name: "7"
+        columns: 7
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.led_gu10_kuchnia
+            fill_container: false
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: false
+            primary_info: name
+            secondary_info: none
+            name: kuchnia
+          - type: custom:mushroom-light-card
+            entity: light.led_gu10_korytarz
+            fill_container: false
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: false
+            primary_info: name
+            secondary_info: none
+            name: korytarz
+          - type: custom:mushroom-light-card
+            entity: light.z2m_led_e27_komputer
+            fill_container: false
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: false
+            primary_info: name
+            secondary_info: none
+            name: salon >
+          - type: custom:mushroom-light-card
+            entity: light.z2m_led_strip_2m_1
+            fill_container: false
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: true
+            primary_info: name
+            secondary_info: none
+            name: LED TV
+            collapsible_controls: false
+          - type: custom:mushroom-light-card
+            entity: light.tasmota_bw_lt11_bw_lt11
+            fill_container: false
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: true
+            show_color_control: true
+            primary_info: name
+            secondary_info: none
+            name: LED KRZ
+          - type: custom:mushroom-light-card
+            entity: light.yeelink_bslamp2_f8fb_light
+            fill_container: false
+            use_light_color: true
+            show_brightness_control: true
+            show_color_temp_control: false
+            show_color_control: true
+            primary_info: name
+            secondary_info: none
+            name: łóżko
+            collapsible_controls: false
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mini-media-player
+            entity: media_player.lg_webos_tv_oled55g13la
+            volume_stateless: true
+            group: false
+            layout_options:
+              grid_columns: 4
+              grid_rows: auto
+            visibility:
+              - condition: user
+                users:
+                  - f8e3398205b44c848394836ba63182f7
+                  - 86f7dda9d68f42d283565095fb80541b
+          - type: custom:mini-media-player
+            entity: media_player.chromecast
+            volume_stateless: true
+            group: false
+            layout_options:
+              grid_columns: 4
+              grid_rows: auto
+            visibility:
+              - condition: user
+                users:
+                  - f8e3398205b44c848394836ba63182f7
+                  - 86f7dda9d68f42d283565095fb80541b
+            info: scroll
+        title: media
+        columns: 1
+        visibility:
+          - condition: user
+            users:
+              - f8e3398205b44c848394836ba63182f7
+              - 86f7dda9d68f42d283565095fb80541b
+      - square: false
+        type: grid
+        cards:
+          - square: false
+            type: grid
+            cards:
+              - type: custom:mushroom-fan-card
+                entity: fan.dmaker_1c_614c_fan
+                icon_animation: true
+                fill_container: true
+                show_percentage_control: true
+                show_oscillate_control: true
+                collapsible_controls: false
+                name: wiatrak
+                secondary_info: state
+                layout: vertical
+              - square: false
+                type: grid
+                cards:
+                  - features:
+                      - style: dropdown
+                        type: fan-preset-modes
+                        preset_modes:
+                          - Favorite
+                          - Sleep
+                          - Auto
+                    type: tile
+                    entity: fan.zhimi_mb4_c515_air_purifier
+                    hide_state: true
+                    vertical: false
+                    name: oczyszczacz
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.filter_auto_alive
+                        state: "off"
+                      - entity: input_boolean.filter_auto_working
+                        state: "off"
+                    card:
+                      type: custom:mushroom-template-card
+                      primary: automatyzacja
+                      secondary: ...uśpiona
+                      icon: mdi:auto-mode
+                      icon_color: grey
+                      layout: horizontal
+                      fill_container: true
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.filter_auto_alive
+                        state: "on"
+                      - entity: input_boolean.filter_auto_working
+                        state: "off"
+                    card:
+                      type: custom:mushroom-template-card
+                      primary: automatyzacja
+                      secondary: ...czeka
+                      icon: mdi:auto-mode
+                      icon_color: green
+                      layout: horizontal
+                      fill_container: true
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.filter_auto_alive
+                        state: "on"
+                      - entity: input_boolean.filter_auto_working
+                        state: "on"
+                    card:
+                      type: custom:mushroom-template-card
+                      primary: automatyzacja
+                      secondary: ...pracuje
+                      icon: mdi:auto-mode
+                      icon_color: green
+                      layout: horizontal
+                      fill_container: true
+                columns: 1
+            columns: 2
+            visibility:
+              - condition: screen
+                media_query: "(min-width: 1280px)"
+          - square: false
+            type: grid
+            cards:
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:mushroom-humidifier-card
+                    entity: humidifier.nawilzacz
+                    fill_container: true
+                    show_target_humidity_control: false
+                    layout: vertical
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.humidifier_auto
+                        state: "on"
+                      - entity: input_boolean.humidifier_auto_working
+                        state: "off"
+                    card:
+                      type: custom:mushroom-template-card
+                      primary: auto...
+                      secondary: czeka
+                      icon: mdi:auto-mode
+                      fill_container: false
+                      icon_color: green
+                      multiline_secondary: false
+                      layout: vertical
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.humidifier_auto
+                        state: "off"
+                      - entity: input_boolean.humidifier_auto_working
+                        state: "off"
+                    card:
+                      type: custom:mushroom-template-card
+                      primary: auto...
+                      secondary: uśpiona
+                      icon: mdi:auto-mode
+                      multiline_secondary: false
+                      icon_color: grey
+                      fill_container: true
+                      layout: vertical
+                  - type: conditional
+                    conditions:
+                      - entity: input_boolean.humidifier_auto
+                        state: "on"
+                      - entity: input_boolean.humidifier_auto_working
+                        state: "on"
+                    card:
+                      type: custom:mushroom-template-card
+                      primary: auto...
+                      secondary: pracuje
+                      icon: mdi:auto-mode
+                      fill_container: true
+                      icon_color: green
+                      multiline_secondary: false
+                      layout: vertical
+                columns: 2
+              - square: false
+                type: grid
+                cards:
+                  - features:
+                      - type: numeric-input
+                        style: buttons
+                    type: tile
+                    entity: number.nawilzacz_warm_mist
+                    show_entity_picture: false
+                    vertical: false
+                    hide_state: true
+                    icon: mdi:waves-arrow-up
+                    name: hot
+                  - features:
+                      - type: numeric-input
+                        style: buttons
+                    type: tile
+                    entity: number.nawilzacz_mist_level
+                    show_entity_picture: false
+                    vertical: false
+                    hide_state: true
+                    icon: mdi:waves-arrow-up
+                    name: cold
+                columns: 2
+            columns: 2
+            visibility:
+              - condition: screen
+                media_query: "(min-width: 1280px)"
+        title: urządzenia
+        columns: 1
+        visibility:
+          - condition: user
+            users:
+              - f8e3398205b44c848394836ba63182f7
+              - 86f7dda9d68f42d283565095fb80541b
+# column 2
+  - type: grid
+    cards:
+      - square: false
+        type: grid
+        cards:
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.assist_microphone_pomoc_w_toku
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: Asystent
+              secondary: ...działa
+              icon: mdi:microphone-message
+              icon_color: pink
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.lodowka
+                state_not: "on"
+              - entity: binary_sensor.nawilzacz_out_of_water
+                state_not: "on"
+              - entity: binary_sensor.czujnik_zalania_water_leak
+                state_not: "on"
+              - entity: binary_sensor.z2m_balkon_drzwi_dol_contact
+                state_not: "on"
+              - entity: binary_sensor.z2m_water_leak_probe_water_leak
+                state_not: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: Brak alarmów
+              secondary: ...po tej stronie
+              icon: mdi:checkbox-marked-circle-outline
+              icon_color: green
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.lodowka
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! Topi się !"
+              secondary: lodówka
+              icon: mdi:fridge-bottom
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.nawilzacz_out_of_water
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: Nawilżacz
+              secondary: ...dolej?
+              icon: mdi:home
+              multiline_secondary: false
+              fill_container: false
+              icon_color: orange
+              badge_icon: ""
+              badge_color: ""
+          - type: conditional
+            conditions:
+              - entity: binary_sensor.czujnik_zalania_water_leak
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! CIEKNIE !"
+              secondary: pralka
+              icon: mdi:water-alert
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: binary_sensor.z2m_water_leak_probe_water_leak
+                state: "on"
+            card:
+              type: custom:mushroom-template-card
+              primary: "! pralka !"
+              secondary: cieknie!
+              icon: mdi:washing-machine-alert
+              icon_color: red
+              multiline_secondary: false
+              fill_container: false
+        columns: 2
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 0px)"
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.mieszkanie_degc
+                show_state: true
+                state_adaptive_color: true
+              - entity: sensor.z2m_temp_balkon_3_temperature
+                show_state: true
+                show_fill: true
+                state_adaptive_color: true
+                labels_secondary: true
+            name: mieszkanie / balkon
+            hours_to_show: 24
+            points_per_hour: 3
+            animate: true
+            align_header: center
+            align_icon: left
+            decimals: 1
+            height: 56
+            show:
+              labels: true
+              fill: true
+              legend: false
+              labels_secondary: true
+              state: true
+              line_width: 5
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.salon_wilgotnosc
+                show_state: true
+                state_adaptive_color: true
+              - entity: sensor.balkon_hum
+                show_state: true
+                show_fill: true
+                state_adaptive_color: true
+                labels_secondary: true
+            name: mieszkanie / balkon
+            hours_to_show: 24
+            points_per_hour: 3
+            animate: true
+            align_header: center
+            align_icon: left
+            decimals: 1
+            height: 56
+            show:
+              labels: true
+              fill: true
+              legend: false
+              labels_secondary: true
+              state: true
+              line_width: 5
+        columns: 1
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.z2m_lodowka_temp_temperature
+                show_state: true
+                state_adaptive_color: true
+              - entity: sensor.z2m_zamarazarka_temp_temperature
+                show_state: true
+                show_fill: true
+                state_adaptive_color: true
+                labels_secondary: false
+                y_axis: secondary
+            name: lodówka / zamrażarka
+            hours_to_show: 24
+            points_per_hour: 3
+            animate: true
+            align_header: center
+            align_icon: left
+            decimals: 1
+            height: 60
+            show:
+              labels: false
+              fill: true
+              legend: false
+              labels_secondary: false
+              state: true
+              line_width: 5
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.roslinki_w
+                show_state: true
+                state_adaptive_color: true
+              - entity: sensor.smartplug_serwer_moc
+                show_state: true
+                show_fill: true
+                state_adaptive_color: true
+                labels_secondary: true
+                y_axis: secondary
+            name: roślinki / serwer
+            hours_to_show: 24
+            points_per_hour: 3
+            animate: true
+            align_header: left
+            align_icon: left
+            decimals: 1
+            height: 60
+            show:
+              labels: false
+              fill: true
+              legend: false
+              labels_secondary: false
+              state: true
+              line_width: 5
+        columns: 2
+      - square: false
+        type: grid
+        cards:
+          - type: custom:tabbed-card
+            options: {}
+            tabs:
+              - card:
+                  type: custom:weather-chart-card
+                  entity: weather.forecast_h0m3
+                  show_main: true
+                  show_temperature: true
+                  show_current_condition: true
+                  show_attributes: true
+                  show_time: false
+                  show_time_seconds: false
+                  show_day: false
+                  show_date: false
+                  show_humidity: true
+                  show_pressure: true
+                  show_wind_direction: true
+                  show_wind_speed: true
+                  show_sun: true
+                  show_feels_like: false
+                  show_dew_point: false
+                  show_wind_gust_speed: false
+                  show_visibility: false
+                  show_last_changed: false
+                  use_12hour_format: false
+                  icons_size: 25
+                  animated_icons: false
+                  icon_style: style1
+                  forecast:
+                    precipitation_type: rainfall
+                    show_probability: true
+                    labels_font_size: "11"
+                    precip_bar_size: "100"
+                    style: style2
+                    show_wind_forecast: true
+                    condition_icons: true
+                    round_temp: false
+                    type: hourly
+                    number_of_forecasts: "0"
+                    disable_animation: false
+                  units:
+                    pressure: ""
+                    speed: ""
+                attributes:
+                  label: Godzinowo
+              - card:
+                  type: custom:weather-chart-card
+                  entity: weather.forecast_h0m3
+                  show_main: true
+                  show_temperature: true
+                  show_current_condition: true
+                  show_attributes: true
+                  show_time: false
+                  show_time_seconds: false
+                  show_day: false
+                  show_date: false
+                  show_humidity: true
+                  show_pressure: true
+                  show_wind_direction: true
+                  show_wind_speed: true
+                  show_sun: true
+                  show_feels_like: false
+                  show_dew_point: false
+                  show_wind_gust_speed: false
+                  show_visibility: false
+                  show_last_changed: false
+                  use_12hour_format: false
+                  icons_size: 25
+                  animated_icons: false
+                  icon_style: style1
+                  forecast:
+                    precipitation_type: rainfall
+                    show_probability: true
+                    labels_font_size: "11"
+                    precip_bar_size: "100"
+                    style: style2
+                    show_wind_forecast: true
+                    condition_icons: true
+                    round_temp: false
+                    type: daily
+                    number_of_forecasts: "0"
+                    disable_animation: false
+                  units:
+                    pressure: ""
+                    speed: ""
+                attributes:
+                  label: Dziennie
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.z2m_szafa_temp_hum_press_pressure
+                show_state: true
+                state_adaptive_color: true
+            name: cisnienie / hPa
+            hours_to_show: 24
+            points_per_hour: 3
+            animate: true
+            align_header: left
+            align_icon: left
+            decimals: 1
+            height: 33
+            show: null
+            labels: false
+            fill: true
+            legend: false
+            labels_secondary: false
+            state: true
+            line_width: 5
+        columns: 1
+        title: pogoda
+        visibility:
+          - condition: user
+            users:
+              - f8e3398205b44c848394836ba63182f7
+              - 86f7dda9d68f42d283565095fb80541b
+# column 3
+  - type: grid
+    cards:
+      - type: custom:tabbed-card
+        options: {}
+        tabs:
+          - card:
+              type: vertical-stack
+              cards:
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_salon_temp_lcd_1_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: TV
+                    - entity: sensor.z2m_szafa_temp_hum_press_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: szafa
+                    - entity: sensor.z2m_owalny_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: korytarz
+                    - entity: sensor.z2m_sypialnia_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: sypialnia
+                    - entity: sensor.z2m_lazienka_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: łazienka
+                  name: mieszkanie °C
+                  hours_to_show: 24
+                  points_per_hour: 3
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_temp_balkon_3_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: bok
+                    - entity: sensor.z2m_balkon_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: ławka
+                    - entity: sensor.z2m_temp_hum_balkon_barierka_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: kwietnik
+                  name: balkon °C
+                  hours_to_show: 24
+                  points_per_hour: 3
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+            attributes:
+              label: 24h
+          - card:
+              type: vertical-stack
+              cards:
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_salon_temp_lcd_1_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: TV
+                    - entity: sensor.z2m_szafa_temp_hum_press_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: szafa
+                    - entity: sensor.z2m_owalny_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: korytarz
+                    - entity: sensor.z2m_sypialnia_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: sypialnia
+                    - entity: sensor.z2m_lazienka_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: łazienka
+                  name: mieszkanie °C
+                  hours_to_show: 12
+                  points_per_hour: 6
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_temp_balkon_3_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: bok
+                    - entity: sensor.z2m_balkon_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: ławka
+                    - entity: sensor.z2m_temp_hum_balkon_barierka_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: kwietnik
+                  name: balkon °C
+                  hours_to_show: 12
+                  points_per_hour: 6
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+            attributes:
+              label: 12h
+          - card:
+              type: vertical-stack
+              cards:
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_salon_temp_lcd_1_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: TV
+                    - entity: sensor.z2m_szafa_temp_hum_press_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: szafa
+                    - entity: sensor.z2m_owalny_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: korytarz
+                    - entity: sensor.z2m_sypialnia_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: sypialnia
+                    - entity: sensor.z2m_lazienka_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: łazienka
+                  name: mieszkanie °C
+                  hours_to_show: 3
+                  points_per_hour: 18
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_temp_balkon_3_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: bok
+                    - entity: sensor.z2m_balkon_temp_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: ławka
+                    - entity: sensor.z2m_temp_hum_balkon_barierka_temperature
+                      show_state: true
+                      state_adaptive_color: true
+                      name: kwietnik
+                  name: balkon °C
+                  hours_to_show: 3
+                  points_per_hour: 18
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+            attributes:
+              label: 3h
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-template-card
+            primary: "balkon "
+            secondary: >
+
+              {{
+
+              relative_time(states.binary_sensor.z2m_balkon_drzwi_2_contact.last_changed)
+
+              }}
+            icon: >
+              {% if (states('binary_sensor.z2m_balkon_drzwi_2_contact') ==
+              'off') and (states('binary_sensor.z2m_balkon_drzwi_dol_contact')
+              == 'off') %}
+                mdi:door-closed
+              {% elif (states('binary_sensor.z2m_balkon_drzwi_2_contact') ==
+              'on') and (states('binary_sensor.z2m_balkon_drzwi_dol_contact') ==
+              'off') %}
+                mdi:door-sliding-open
+              {% else %}
+                mdi:door-open
+              {% endif %}
+            icon_color: >
+              {% if (states('binary_sensor.z2m_balkon_drzwi_2_contact') ==
+              'off')  and (states('binary_sensor.z2m_balkon_drzwi_dol_contact')
+              == 'off') %}
+                green
+              {% elif (states('binary_sensor.z2m_balkon_drzwi_2_contact') ==
+              'on') and (states('binary_sensor.z2m_balkon_drzwi_dol_contact') ==
+              'off') %}
+                yellow
+              {% else %}
+                red
+              {% endif %}
+            entity: binary_sensor.z2m_balkon_drzwi_2_contact
+            multiline_secondary: true
+            fill_container: true
+            tap_action:
+              action: more-info
+            layout: vertical
+          - type: custom:mushroom-template-card
+            primary: klatka
+            secondary: >
+
+              {{
+
+              relative_time(states.binary_sensor.z2m_klatka_drzwi_contact.last_changed)
+
+              }}
+            icon: |
+              {% if states('binary_sensor.z2m_klatka_drzwi_contact') == 'off' %}
+                mdi:door-closed
+              {% else %}
+                mdi:door-open
+              {% endif %}
+            icon_color: |
+              {% if states('binary_sensor.z2m_klatka_drzwi_contact') == 'off' %}
+                green
+              {% else %}
+                red
+              {% endif %}
+            multiline_secondary: true
+            fill_container: true
+            entity: binary_sensor.z2m_klatka_drzwi_contact
+            layout: vertical
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: sypialnia
+            secondary: >
+
+              {{
+
+              relative_time(states.binary_sensor.z2m_sypialnia_drzwi_contact.last_changed)
+
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_sypialnia_drzwi_contact') == 'off'
+              %}
+                mdi:door-closed
+              {% else %}
+                mdi:door-open
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_sypialnia_drzwi_contact') == 'off'
+              %}
+                green
+              {% else %}
+                red
+              {% endif %}
+            multiline_secondary: true
+            fill_container: true
+            entity: binary_sensor.z2m_sypialnia_drzwi_contact
+            layout: vertical
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: łazienka
+            secondary: >
+
+              {{
+
+              relative_time(states.binary_sensor.z2m_lazienka_drzwi_contact.last_changed)
+
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_lazienka_drzwi_contact') == 'off'
+              %}
+                mdi:door-closed
+              {% else %}
+                mdi:door-open
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_lazienka_drzwi_contact') == 'off'
+              %}
+                green
+              {% else %}
+                red
+              {% endif %}
+            multiline_secondary: true
+            fill_container: true
+            entity: binary_sensor.z2m_lazienka_drzwi_contact
+            layout: vertical
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: kuchnia
+            secondary: >-
+              {{relative_time(states.binary_sensor.z2m_lazienka_drzwi_contact.last_changed)}}
+            icon: |
+              {% if states('binary_sensor.z2m_okno_kuchnia_contact') == 'off' %}
+                mdi:door-closed
+              {% else %}
+                mdi:door-open
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_lazienka_drzwi_contact') == 'off'
+              %}
+                green
+              {% else %}
+                yellow
+              {% endif %}
+            multiline_secondary: true
+            fill_container: true
+            entity: binary_sensor.z2m_lazienka_drzwi_contact
+            layout: vertical
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: sypialnia
+            secondary: >
+
+              {{
+
+              relative_time(states.binary_sensor.z2m_sypialnia_drzwi_contact.last_changed)
+
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_sypialnia_drzwi_contact') == 'off'
+              %}
+                mdi:door-closed
+              {% else %}
+                mdi:door-open
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_lazienka_drzwi_contact') == 'off'
+              %}
+                green
+              {% else %}
+                yellow
+              {% endif %}
+            multiline_secondary: true
+            fill_container: true
+            entity: binary_sensor.z2m_lazienka_drzwi_contact
+            layout: vertical
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: salon
+            secondary: >
+              {{
+              relative_time(states.binary_sensor.z2m_salon_ruch_occupancy.last_changed)
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_salon_ruch_occupancy') == 'on' %}
+              mdi:motion-sensor {% else %} mdi:motion-sensor-off {% endif %}
+            entity: binary_sensor.z2m_salon_ruch_occupancy
+            icon_color: >
+              {% if states('binary_sensor.z2m_salon_ruch_occupancy') == 'on' %}
+              white {% else %} black {% endif %}
+            layout: vertical
+            fill_container: true
+            multiline_secondary: false
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: sypialnia
+            secondary: >
+              {{
+              relative_time(states.binary_sensor.z2m_sypialnia_ruch_occupancy.last_changed)
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_sypialnia_ruch_occupancy') == 'on'
+              %} mdi:motion-sensor {% else %} mdi:motion-sensor-off {% endif %}
+            entity: binary_sensor.z2m_sypialnia_ruch_occupancy
+            icon_color: >
+              {% if states('binary_sensor.z2m_sypialnia_ruch_occupancy') == 'on'
+              %} white {% else %} black {% endif %}
+            layout: vertical
+            fill_container: true
+            multiline_secondary: true
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: łazienka
+            secondary: >
+              {{
+              relative_time(states.binary_sensor.z2m_lazienka_ruch_occupancy.last_changed)
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_lazienka_ruch_occupancy') == 'on'
+              %} mdi:motion-sensor {% else %} mdi:motion-sensor-off {% endif %}
+            entity: binary_sensor.z2m_lazienka_ruch_occupancy
+            icon_color: >
+              {% if states('binary_sensor.z2m_lazienka_ruch_occupancy') == 'on'
+              %} white {% else %} black {% endif %}
+            layout: vertical
+            fill_container: true
+            multiline_secondary: true
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: korytarz
+            secondary: >
+              {{
+              relative_time(states.binary_sensor.z2m_korytarz_ruch_occupancy.last_changed)
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_korytarz_ruch_occupancy') == 'on'
+              %} mdi:motion-sensor {% else %} mdi:motion-sensor-off {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_korytarz_ruch_occupancy') == 'on'
+              %} white {% else %} black {% endif %}
+            layout: vertical
+            fill_container: true
+            multiline_secondary: true
+            entity: binary_sensor.z2m_korytarz_ruch_occupancy
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: ściana
+            secondary: >
+              {{
+              relative_time(states.binary_sensor.z2m_pir_zlew_naprzeciwko_occupancy.last_changed)
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_pir_zlew_naprzeciwko_occupancy')
+              == 'on' %} mdi:motion-sensor {% else %} mdi:motion-sensor-off {%
+              endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_pir_zlew_naprzeciwko_occupancy')
+              == 'on' %} white {% else %} black {% endif %}
+            layout: vertical
+            fill_container: true
+            multiline_secondary: true
+            entity: binary_sensor.z2m_pir_zlew_naprzeciwko_occupancy
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: zlew
+            secondary: >
+              {{
+              relative_time(states.binary_sensor.z2m_pir_zlew_occupancy.last_changed)
+              }}
+            icon: >
+              {% if states('binary_sensor.z2m_pir_zlew_occupancy') == 'on' %}
+              mdi:motion-sensor {% else %} mdi:motion-sensor-off {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.z2m_pir_zlew_occupancy') == 'on' %}
+              white {% else %} black {% endif %}
+            layout: vertical
+            fill_container: true
+            multiline_secondary: true
+            entity: binary_sensor.z2m_pir_zlew_occupancy
+            tap_action:
+              action: more-info
+        columns: 3
+        visibility:
+          - condition: screen
+            media_query: "(min-width: 1280px)"
+        title: czujniki
+    visibility:
+      - condition: user
+        users:
+          - 86f7dda9d68f42d283565095fb80541b
+          - f8e3398205b44c848394836ba63182f7
+# column 4 
+  - type: grid
+    cards:
+      - type: custom:tabbed-card
+        options: {}
+        tabs:
+          - card:
+              type: vertical-stack
+              cards:
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_salon_temp_lcd_1_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: TV
+                    - entity: sensor.z2m_szafa_temp_hum_press_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: szafa
+                    - entity: sensor.z2m_owalny_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: korytarz
+                    - entity: sensor.z2m_sypialnia_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: sypialnia
+                    - entity: sensor.z2m_lazienka_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: łazienka
+                  name: mieszkanie
+                  hours_to_show: 24
+                  points_per_hour: 3
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_temp_balkon_3_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: bok
+                    - entity: sensor.z2m_balkon_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: ławka
+                    - entity: sensor.z2m_temp_hum_balkon_barierka_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: kwietnik
+                  name: balkon
+                  hours_to_show: 24
+                  points_per_hour: 3
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+            attributes:
+              label: 24h
+          - card:
+              type: vertical-stack
+              cards:
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_salon_temp_lcd_1_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: TV
+                    - entity: sensor.z2m_szafa_temp_hum_press_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: szafa
+                    - entity: sensor.z2m_owalny_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: korytarz
+                    - entity: sensor.z2m_sypialnia_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: sypialnia
+                    - entity: sensor.z2m_lazienka_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: łazienka
+                  name: mieszkanie
+                  hours_to_show: 12
+                  points_per_hour: 6
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_temp_balkon_3_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: bok
+                    - entity: sensor.z2m_balkon_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: ławka
+                    - entity: sensor.z2m_temp_hum_balkon_barierka_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: kwietnik
+                  name: balkon
+                  hours_to_show: 12
+                  points_per_hour: 6
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+            attributes:
+              label: 12h
+          - card:
+              type: vertical-stack
+              cards:
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_salon_temp_lcd_1_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: TV
+                    - entity: sensor.z2m_szafa_temp_hum_press_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: szafa
+                    - entity: sensor.z2m_owalny_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: korytarz
+                    - entity: sensor.z2m_sypialnia_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: sypialnia
+                    - entity: sensor.z2m_lazienka_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: łazienka
+                  name: mieszkanie
+                  hours_to_show: 3
+                  points_per_hour: 18
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+                - type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.z2m_temp_balkon_3_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: bok
+                    - entity: sensor.z2m_balkon_temp_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: ławka
+                    - entity: sensor.z2m_temp_hum_balkon_barierka_humidity
+                      show_state: true
+                      state_adaptive_color: true
+                      name: kwietnik
+                  name: balkon
+                  hours_to_show: 3
+                  points_per_hour: 18
+                  animate: true
+                  align_header: left
+                  align_icon: left
+                  decimals: 2
+                  height: 128
+                  min_bound_range: 5
+                  show:
+                    labels: true
+                    fill: true
+                    legend: true
+                    labels_secondary: true
+                    state: true
+                    line_width: 2
+            attributes:
+              label: 3h
+      - square: false
+        type: grid
+        cards:
+          - type: custom:mushroom-template-card
+            primary: VM1
+            secondary: >-
+              dell
+
+              {{
+
+              relative_time(states.binary_sensor.dell_ubuntu_server_vm1.last_changed)
+
+              }}
+            icon: >
+              {% if states('binary_sensor.dell_ubuntu_server_vm1.state') ==
+              'off' %}
+                mdi:server-off
+              {% else %}
+                mdi:server-outline
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.dell_ubuntu_server_vm1.state') ==
+              'off' %}
+                red
+              {% else %}
+                green
+              {% endif %}
+            multiline_secondary: false
+            fill_container: false
+            entity: binary_sensor.dell_ubuntu_server_vm1
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: PBS
+            secondary: >-
+              aoostar
+
+              {{
+
+              relative_time(states.binary_sensor.aoostar_pbs_debian_ct.last_changed)
+
+              }}
+            icon: >
+              {% if states('binary_sensor.aoostar_pbs_debian_ct.state') == 'off'
+              %}
+                mdi:server-off
+              {% else %}
+                mdi:server-outline
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.aoostar_pbs_debian_ct.state') == 'off'
+              %}
+                red
+              {% else %}
+                green
+              {% endif %}
+            multiline_secondary: false
+            fill_container: false
+            entity: binary_sensor.aoostar_pbs_debian_ct
+            tap_action:
+              action: more-info
+          - type: custom:mushroom-template-card
+            primary: NGINX
+            secondary: >-
+              N100
+
+              {{
+
+              relative_time(states.binary_sensor.n100_nginxproxymanager.last_changed)
+
+              }}
+            icon: >
+              {% if states('binary_sensor.n100_nginxproxymanager.state') ==
+              'off' %}
+                mdi:server-off
+              {% else %}
+                mdi:server-network
+              {% endif %}
+            icon_color: >
+              {% if states('binary_sensor.n100_nginxproxymanager.state') ==
+              'off' %}
+                red
+              {% else %}
+                green
+              {% endif %}
+            multiline_secondary: false
+            fill_container: false
+            entity: binary_sensor.n100_nginxproxymanager
+            tap_action:
+              action: more-info
+        columns: 3
+        title: homelab
+        visibility:
+          - condition: user
+            users:
+              - 86f7dda9d68f42d283565095fb80541b
+      - square: false
+        type: grid
+        cards:
+          - type: tile
+            entity: sensor.qbittorrent_wszystkie_torrenty
+            name: torrenty
+          - type: tile
+            entity: sensor.qbittorrent_aktywne_torrenty
+            name: aktywne
+          - type: tile
+            entity: sensor.qbittorrent_inactive_torrents
+            name: nieaktywne
+          - type: tile
+            entity: sensor.qbittorrent_paused_torrents
+            name: zapauzowane
+          - type: tile
+            entity: sensor.qbittorrent_download_speed
+            name: download
+          - type: tile
+            entity: sensor.qbittorrent_upload_speed
+            name: upload
+        visibility:
+          - condition: user
+            users:
+              - 86f7dda9d68f42d283565095fb80541b
+      - type: entities
+        entities:
+          - entity: select.assist_microphone_finished_speaking_detection
+            secondary_info: none
+            name: Detekcja kończenia mowy
+            icon: mdi:account-voice-off
+          - entity: select.assist_microphone_noise_suppression_level
+            name: Tłumienie hałasu
+            icon: mdi:microphone-question-outline
+          - entity: number.assist_microphone_auto_gain
+            name: Auto gain
+          - entity: number.assist_microphone_mic_volume
+            name: Mic vol
+        visibility:
+          - condition: or
+            conditions:
+              - condition: screen
+                media_query: "(min-width: 1024px)"
+              - condition: or
+                conditions:
+                  - condition: user
+                    users:
+                      - 86f7dda9d68f42d283565095fb80541b
+        layout_options:
+          grid_columns: 4
+          grid_rows: 4
+    visibility:
+      - condition: user
+        users:
+          - 86f7dda9d68f42d283565095fb80541b
+          - f8e3398205b44c848394836ba63182f7
+icon: mdi:phone-rotate-landscape
+cards: []
